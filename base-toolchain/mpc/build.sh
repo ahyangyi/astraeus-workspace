@@ -8,5 +8,5 @@ cd mpc-${VERSION}
 mkdir -p build
 cd build
 ../configure --with-gnu-ld --prefix=${PWD}/../prefix/ --enable-shared=no CFLAGS="${CFLAGS} -fPIC -DPIC" --host=x86_64-unknown-linux
-make ${MAKEOPTS} && make check && make install
+make ${MAKEOPTS} && make check install
 rm ../prefix/lib/libmpc.la
