@@ -7,5 +7,5 @@ def repos():
                 ],
         sha256 = "36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d",
         strip_prefix = "zlib-1.2.8",
-        build_file = str(Label("//base-libs:zlib.BUILD")),
+        build_file = str(Label("//lib-base:zlib.BUILD")),
         )

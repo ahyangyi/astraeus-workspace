@@ -1,3 +1,3 @@
-load("//base-libs:repos.bzl", "repos")
+load("//lib-base:repos.bzl", "repos")
 
 repos()
