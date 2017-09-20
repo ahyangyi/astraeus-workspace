@@ -2,8 +2,6 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # BSD/MIT-like license (for zlib)
 
-load("@//toolchain-utils:os.bzl", "windows_select")
-
 cc_library(
     name = "zlib",
     srcs = [
@@ -34,11 +32,8 @@ cc_library(
         "zutil.h",
     ],
     hdrs = ["zlib.h"],
-    copts = windows_select(
-        [], [
-            "-Wno-shift-negative-value",
-            "-Wno-implicit-function-declaration",
+    copts = [
+            "-DZ_HAVE_UNISTD_H",
         ],
-    ),
     includes = ["."],
 )

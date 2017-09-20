@@ -2,10 +2,9 @@ def repos():
     native.new_http_archive(
         name = "zlib_archive",
         urls = [
-                "http://mirror.bazel.build/zlib.net/zlib-1.2.8.tar.gz",
-                "http://zlib.net/fossils/zlib-1.2.8.tar.gz",
+                "https://zlib.net/zlib-1.2.11.tar.xz",
                 ],
-        sha256 = "36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d",
-        strip_prefix = "zlib-1.2.8",
+        sha256 = "4ff941449631ace0d4d203e3483be9dbc9da454084111f97ea0a2114e19bf066",
+        strip_prefix = "zlib-1.2.11",
         build_file = str(Label("//lib-base:zlib.BUILD")),
         )
