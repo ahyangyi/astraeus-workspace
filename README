@@ -1,1 +1,6 @@
-A distribution of portable binary packages and corresponding build scripts.
+ASTREAUS PACKAGE BUILDER
+========================
+
+This is a Bazel Workspace that builds some open-source libraries and applications without using their own build systems.
+This is largely experimental for fun, but it might have potential real usages as it provides a uniform interface to building things.
+For example, a compiler developer might find testing his new compiler plugin on all the open source projects in this repository valuable.
