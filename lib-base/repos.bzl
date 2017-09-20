@@ -18,3 +18,12 @@ def repos():
         strip_prefix = "googletest-release-1.8.0",
         build_file = str(Label("//lib-base:googletest.BUILD")),
         )
+
+    native.http_archive(
+        name = "com_github_gflags_gflags",
+        urls = [
+                "https://github.com/gflags/gflags/archive/v2.2.1.tar.gz",
+                ],
+        sha256 = "ae27cdbcd6a2f935baa78e4f21f675649271634c092b1be01469440495609d0e",
+        strip_prefix = "gflags-2.2.1",
+        )
