@@ -1,6 +1,6 @@
 def repos():
     native.new_http_archive(
-        name = "zlib_archive",
+        name = "zlib",
         urls = [
                 "https://zlib.net/zlib-1.2.11.tar.xz",
                 ],

@@ -1,6 +1,6 @@
 def repos():
   native.new_http_archive(
-      name = "png_archive",
+      name = "png",
       urls = [
           "http://ftp-osl.osuosl.org/pub/libpng/src/libpng16/libpng-1.6.32.tar.xz",
       ],
