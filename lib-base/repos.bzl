@@ -27,3 +27,14 @@ def repos():
         sha256 = "ae27cdbcd6a2f935baa78e4f21f675649271634c092b1be01469440495609d0e",
         strip_prefix = "gflags-2.2.1",
         )
+
+    native.new_http_archive(
+        name = "boost",
+        urls = [
+                "https://dl.bintray.com/boostorg/release/1.65.1/source/boost_1_65_1.tar.bz2",
+                "https://dev-www.libreoffice.org/src/boost_1_65_1.tar.bz2",
+                ],
+        sha256 = "9807a5d16566c57fd74fb522764e0b134a8bbe6b6e8967b83afefd30dcd3be81",
+        strip_prefix = "boost_1_65_1",
+        build_file = str(Label("//lib-base:boost.BUILD")),
+        )
