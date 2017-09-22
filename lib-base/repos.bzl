@@ -38,3 +38,14 @@ def repos():
         strip_prefix = "boost_1_65_1",
         build_file = str(Label("//lib-base:boost.BUILD")),
         )
+
+    native.new_http_archive(
+        name = "bzip2",
+        urls = [
+                "http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz",
+                ],
+        sha256 = "a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd",
+        strip_prefix = "bzip2-1.0.6",
+        build_file = str(Label("//lib-base:bzip2.BUILD")),
+        )
+
