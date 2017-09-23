@@ -17,8 +17,28 @@ cc_library(
     )
 
 sublibraries = [
+    "atomic",
+    "chrono",
+    "container",
+    "date_time",
     "filesystem",
+    "graph",
+    "iostreams",
+#    "log",     # Fails for now
+    "math_c99",
+    "math_tr1",
+    "prg_exec_monitor",
+    "program_options",
+    "random",
+    "regex",
+#    "serialization",   # Fails for now
+    "signals",
     "system",
+    "thread",
+    "timer",
+    "type_erasure",
+    "unit_test_framework",
+    "wave",
     ]
 
 [cc_library(
