@@ -82,7 +82,7 @@ cc_binary(
         "-DTIME_WITH_SYS_TIME=1",
         "-DUNIX=1",
         "-DVIM_SIZEOF_INT=4",
-        "-Iexternal/vim_archive/src/",
+        "-Iexternal/vim/src/",
         "-Wno-parentheses",
         ],
     deps = [
