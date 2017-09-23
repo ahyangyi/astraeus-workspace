@@ -49,3 +49,14 @@ def repos():
         build_file = str(Label("//lib-base:bzip2.BUILD")),
         )
 
+    native.new_http_archive(
+        name = "xz",
+        urls = [
+                "https://tukaani.org/xz/xz-5.2.3.tar.xz",
+                "https://sourceforge.net/projects/lzmautils/files/xz-5.2.3.tar.xz/download",
+                ],
+        type = "tar.xz",
+        sha256 = "7876096b053ad598c31f6df35f7de5cd9ff2ba3162e5a5554e4fc198447e0347",
+        strip_prefix = "xz-5.2.3",
+        build_file = str(Label("//lib-base:xz.BUILD")),
+        )
