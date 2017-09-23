@@ -12,6 +12,7 @@ cc_library(
     srcs = glob([
         "kernel/**/*.c",
         "kernel/**/*.h",
+        "api/*.c",
         "*dft/*.h",
         "*dft/*.c",
         "*dft/scalar/**/*.h",

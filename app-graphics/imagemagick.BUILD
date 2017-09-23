@@ -31,10 +31,11 @@ cc_library(
     copts = copts,
     deps = [
         ":generated",
+        "@bzip2//:bzip2",
+        "@fftw//:fftw",
+        "@gif//:gif",
         "@jpeg//:jpeg",
         "@png//:png",
-        "@gif//:gif",
-        "@bzip2//:bzip2",
         "@xz//:lzma",
         ],
     linkopts = [
@@ -62,7 +63,6 @@ template_rule(
     substitutions = {
         "#define MAGICKCORE_DJVU_DELEGATE 1": "",
         "#define MAGICKCORE_DJVU_DELEGATE 1": "",
-        "#define MAGICKCORE_FFTW_DELEGATE 1": "",
         "#define MAGICKCORE_FONTCONFIG_DELEGATE 1": "",
         "#define MAGICKCORE_FREETYPE_DELEGATE 1": "",
         "#define MAGICKCORE_JBIG_DELEGATE 1": "",
