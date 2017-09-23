@@ -5,6 +5,8 @@ licenses(["notice"])  # BSD/MIT-like license
 
 exports_files(["LICENSE"])
 
+load("@//utils-base:files.bzl", "touch")
+
 cc_library(
     name = "png",
     srcs = [
@@ -48,18 +50,7 @@ cc_library(
     deps = ["@zlib//:zlib"],
 )
 
-genrule(
-    name = "gen-fake-config.h",
-    outs = [
-        "gen/config.h",
-        ],
-    cmd = "touch $(@D)/config.h",
-    )
-
-genrule(
-    name = "gen-fake-pnglibconf.h",
-    outs = [
-        "gen/pnglibconf.h",
-        ],
-    cmd = "touch $(@D)/pnglibconf.h",
-    )
+touch([
+    "gen/config.h",
+    "gen/pnglibconf.h",
+    ])
