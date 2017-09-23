@@ -45,7 +45,7 @@ cc_library(
     ],
     linkopts = ["-lm"],
     visibility = ["//visibility:public"],
-    deps = ["@zlib_archive//:zlib"],
+    deps = ["@zlib//:zlib"],
 )
 
 genrule(
