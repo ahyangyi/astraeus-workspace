@@ -1,6 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 
-licenses(["notice"])  # BSD/MIT-like license (for zlib)
+licenses(["notice"])  # BSD/MIT-like license (for xz)
 
 cc_library(
     name = "lzma",
