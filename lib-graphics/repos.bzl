@@ -19,3 +19,14 @@ def repos():
         strip_prefix = "giflib-5.1.4",
         build_file = str(Label("//lib-graphics:gif.BUILD")),
     )
+
+    native.new_http_archive(
+        name = "jpeg",
+        urls = [
+                "https://sourceforge.net/projects/libjpeg-turbo/files/1.5.2/libjpeg-turbo-1.5.2.tar.gz/download",
+                ],
+        type = "tar.gz",
+        sha256 = "9098943b270388727ae61de82adec73cf9f0dbb240b3bc8b172595ebf405b528",
+        strip_prefix = "libjpeg-turbo-1.5.2",
+        build_file = str(Label("//lib-graphics:jpeg-turbo.BUILD")),
+    )
