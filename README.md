@@ -1,5 +1,5 @@
-ASTREAUS PACKAGE BUILDER
-========================
+ASTREAUS WORKSPACE
+==================
 
 This is a Bazel Workspace that builds some open-source libraries and applications without using their own build systems.
 This is largely experimental for fun, but it might have potential real usages as it provides a uniform interface to building things.
