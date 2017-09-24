@@ -14,5 +14,4 @@ load("//app-editor:repos.bzl", "repos")
 repos()
 
 load("//app-graphics:repos.bzl", "repos")
-
 repos()
