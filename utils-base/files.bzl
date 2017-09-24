@@ -1,11 +1,25 @@
+def empty_file_rule_impl(ctx):
+    ctx.actions.write(
+        output = ctx.outputs.out,
+        content = "",
+        is_executable = False,
+    )
+
+empty_file_rule = rule(
+    attrs = {
+            "out": attr.output(
+                    mandatory = True,
+            ),
+    },
+    output_to_genfiles = True,
+    implementation = empty_file_rule_impl,
+)
+
 def touch(paths):
     for path in paths:
-        native.genrule(
+        empty_file_rule(
             name = "gen-file_{}".format(path),
-            outs = [
-                path,
-                ],
-            cmd = "touch $@",
+            out = path,
             )
 
 
@@ -32,7 +46,7 @@ def touch(paths):
 #     substitutions: A dictionary mapping strings to their substitutions
 
 def template_rule_impl(ctx):
-    ctx.template_action(
+    ctx.actions.expand_template(
             template = ctx.file.src,
             output = ctx.outputs.out,
             substitutions = ctx.attr.substitutions,
