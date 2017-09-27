@@ -66,3 +66,43 @@ template_rule = rule(
     output_to_genfiles = True,
     implementation = template_rule_impl,
 )
+
+# Rule for putting creating short files directly in BUILD files.
+#
+# Typical usage:
+#     load("/tools/build_rules/template_rule", "expand_header_template")
+#     template_rule(
+#         name = "ExpandMyTemplate",
+#         src = "my.template",
+#         out = "my.txt",
+#         substitutions = {
+#             "$VAR1": "foo",
+#             "$VAR2": "bar",
+#         }
+#     )
+#
+# Args:
+#     name: The name of the rule.
+#     template: The template file to expand
+#     out: The destination of the expanded file
+#     substitutions: A dictionary mapping strings to their substitutions
+
+
+def write_file_rule_impl(ctx):
+    ctx.actions.write(
+        output = ctx.outputs.out,
+        content = ctx.attr.content,
+        is_executable = ctx.attr.is_executable,
+    )
+
+write_file_rule = rule(
+    attrs = {
+            "out": attr.output(
+                    mandatory = True,
+                    ),
+            "content": attr.string(),
+            "is_executable": attr.bool(),
+    },
+    output_to_genfiles = True,
+    implementation = write_file_rule_impl,
+)

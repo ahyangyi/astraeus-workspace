@@ -2,7 +2,7 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["restricted"])  # Vim license
 
-load("@//utils-base:files.bzl", "touch")
+load("@//utils-base:files.bzl", "touch", "write_file_rule")
 
 cc_library(
     name = "vim-include",
@@ -107,17 +107,14 @@ touch([
     "gen/auto/osdef.h",
     ])
 
-genrule(
-    name = "gen-pathdef.c",
-    outs = [
-        "gen/pathdef.c",
-        ],
-    cmd = "echo -e '" +\
-             "#include \"vim.h\"\\n" +\
-             "char_u *default_vim_dir = (char_u *)\"/usr/share/vim\";\\n" +\
-             "char_u *default_vimruntime_dir = (char_u *)\"\";\\n" +\
-             "char_u *all_cflags = (char_u *)\"Built in Astraeus Distribution\";\\n" +\
-             "char_u *all_lflags = (char_u *)\"Built in Astraeus Distribution\";\\n" +\
-             "char_u *compiled_user = (char_u *)\"Astreaus\";\\n" +\
-             "char_u *compiled_sys = (char_u *)\"Astraeus\";' >  $(@D)/pathdef.c",
+write_file_rule(
+    name = "gen-pathdef_c",
+    out = "gen/pathdef.c",
+    content = "#include \"vim.h\"\n" +\
+             "char_u *default_vim_dir = (char_u *)\"/usr/share/vim\";\n" +\
+             "char_u *default_vimruntime_dir = (char_u *)\"\";\n" +\
+             "char_u *all_cflags = (char_u *)\"Built in Astraeus Distribution\";\n" +\
+             "char_u *all_lflags = (char_u *)\"Built in Astraeus Distribution\";\n" +\
+             "char_u *compiled_user = (char_u *)\"Astreaus\";\n" +\
+             "char_u *compiled_sys = (char_u *)\"Astraeus\";",
     )

@@ -5,7 +5,7 @@ licenses(["notice"])  # custom notice-style license, see LICENSE.md
 
 exports_files(["LICENSE.md"])
 
-load("@//utils-base:files.bzl", "template_rule")
+load("@//utils-base:files.bzl", "template_rule", "write_file_rule")
 
 libjpegturbo_nocopts = "-[W]error"
 
@@ -396,11 +396,10 @@ genrule(
 )
 
 # jiminy cricket the way this file is generated is completely outrageous
-genrule(
+write_file_rule(
     name = "configure_simd",
-    outs = ["simd/jsimdcfg.inc"],
-    cmd = "cat <<'EOF' >$@\n" +
-          "%define DCTSIZE 8\n" +
+    out = "simd/jsimdcfg.inc",
+    content = "%define DCTSIZE 8\n" +
           "%define DCTSIZE2 64\n" +
           "%define RGB_RED 0\n" +
           "%define RGB_GREEN 1\n" +
@@ -461,8 +460,7 @@ genrule(
           "%define JSIMD_MMX 0x01\n" +
           "%define JSIMD_3DNOW 0x02\n" +
           "%define JSIMD_SSE 0x04\n" +
-          "%define JSIMD_SSE2 0x08\n" +
-          "EOF",
+          "%define JSIMD_SSE2 0x08\n",
 )
 
 config_setting(

@@ -1,5 +1,7 @@
 package(default_visibility = ['//visibility:public'])
 
+load("@//utils-base:files.bzl", "template_rule", "write_file_rule")
+
 # We build a generic gmp but tune for a modern microarchitecture
 gmp_tune_arch = "skylake"
 
@@ -222,8 +224,6 @@ copts = [
         "-Wno-unused-value",
         "-Wno-unused-variable",
         "-D__GMP_WITHIN_GMP",
-        '-DLSYM_PREFIX=\\".L\\"',
-        '-DVERSION=\\"6.1.2-Astraeus\\"',
         "-std=gnu99",
         "-Iexternal/gmp/mpn",
         "-Iexternal/gmp/mpz",
@@ -301,19 +301,140 @@ cc_library(
     copts = copts,
     )
 
-genrule(
-    name = "generate-gmp-h",
-    srcs = ["gmp-h.in"],
-    outs = ["public/gmp.h"],
-    cmd = "sed -e 's/@HAVE_HOST_CPU_FAMILY_power@/0/g' -e 's/@HAVE_HOST_CPU_FAMILY_powerpc@/0/g' -e 's/@GMP_LIMB_BITS@/64/g' -e 's/@GMP_NAIL_BITS@/0/g' -e 's/@DEFN_LONG_LONG_LIMB@//g' -e 's/@LIBGMP_DLL@/0/g' -e 's/@CC@/Astraeus/g' -e 's/@CFLAGS@/Astreaus/g' $(location gmp-h.in) > $(@D)/gmp.h",
+template_rule(
+    name = "public_gmp_h",
+    src = "gmp-h.in",
+    out = "public/gmp.h",
+    substitutions = {
+        '@GMP_LIMB_BITS@': '64',
+        '@GMP_NAIL_BITS@': '0',
+        '@DEFN_LONG_LONG_LIMB@': '',
+        '@LIBGMP_DLL@': '0',
+        '@CC@': 'Astraeus',
+        '@CFLAGS@': 'Astraeus',
+    },
+)
+
+write_file_rule(
+    name = "generate-config-h",
+    out = "config.h",
+    content =\
+        "#define HAVE_ATTRIBUTE_CONST 1\n"+\
+        "#define HAVE_ATTRIBUTE_MALLOC 1\n"+\
+        "#define HAVE_ATTRIBUTE_MODE 1\n"+\
+        "#define HAVE_ATTRIBUTE_NORETURN 1\n"+\
+        "#define HAVE_CALLING_CONVENTIONS 1\n"+\
+        "#define HAVE_DLFCN_H 1\n"+\
+        "#define HAVE_DOUBLE_IEEE_LITTLE_ENDIAN 1\n"+\
+        "#define HAVE_FCNTL_H 1\n"+\
+        "#define HAVE_FLOAT_H 1\n"+\
+        "#define HAVE_HIDDEN_ALIAS 1\n"+\
+        "#define HAVE_HOST_CPU_FAMILY_x86_64 1\n"+\
+        "#define HAVE_INTMAX_T 1\n"+\
+        "#define HAVE_INTPTR_T 1\n"+\
+        "#define HAVE_INTTYPES_H 1\n"+\
+        "#define HAVE_LIMB_LITTLE_ENDIAN 1\n"+\
+        "#define HAVE_LONG_DOUBLE 1\n"+\
+        "#define HAVE_LONG_LONG 1\n"+\
+        "#define HAVE_MEMSET 1\n"+\
+        "#define HAVE_MMAP 1\n"+\
+        "#define HAVE_MPROTECT 1\n"+\
+        "#define HAVE_NATIVE_mpn_add_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_add_nc 1\n"+\
+        "#define HAVE_NATIVE_mpn_addaddmul_1msb0 1\n"+\
+        "#define HAVE_NATIVE_mpn_addlsh1_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_addlsh2_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_addlsh_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_addmul_2 1\n"+\
+        "#define HAVE_NATIVE_mpn_and_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_andn_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_bdiv_dbm1c 1\n"+\
+        "#define HAVE_NATIVE_mpn_bdiv_q_1 1\n"+\
+        "#define HAVE_NATIVE_mpn_cnd_add_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_cnd_sub_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_com 1\n"+\
+        "#define HAVE_NATIVE_mpn_copyd 1\n"+\
+        "#define HAVE_NATIVE_mpn_copyi 1\n"+\
+        "#define HAVE_NATIVE_mpn_div_qr_1n_pi1 1\n"+\
+        "#define HAVE_NATIVE_mpn_divexact_1 1\n"+\
+        "#define HAVE_NATIVE_mpn_divrem_1 1\n"+\
+        "#define HAVE_NATIVE_mpn_divrem_2 1\n"+\
+        "#define HAVE_NATIVE_mpn_gcd_1 1\n"+\
+        "#define HAVE_NATIVE_mpn_hamdist 1\n"+\
+        "#define HAVE_NATIVE_mpn_invert_limb 1\n"+\
+        "#define HAVE_NATIVE_mpn_ior_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_iorn_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_lshift 1\n"+\
+        "#define HAVE_NATIVE_mpn_lshiftc 1\n"+\
+        "#define HAVE_NATIVE_mpn_mod_1_1p 1\n"+\
+        "#define HAVE_NATIVE_mpn_mod_1s_2p 1\n"+\
+        "#define HAVE_NATIVE_mpn_mod_1s_4p 1\n"+\
+        "#define HAVE_NATIVE_mpn_mod_34lsub1 1\n"+\
+        "#define HAVE_NATIVE_mpn_modexact_1_odd 1\n"+\
+        "#define HAVE_NATIVE_mpn_modexact_1c_odd 1\n"+\
+        "#define HAVE_NATIVE_mpn_mul_1 1\n"+\
+        "#define HAVE_NATIVE_mpn_mul_1c 1\n"+\
+        "#define HAVE_NATIVE_mpn_mul_2 1\n"+\
+        "#define HAVE_NATIVE_mpn_mul_basecase 1\n"+\
+        "#define HAVE_NATIVE_mpn_mullo_basecase 1\n"+\
+        "#define HAVE_NATIVE_mpn_nand_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_nior_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_pi1_bdiv_q_1 1\n"+\
+        "#define HAVE_NATIVE_mpn_popcount 1\n"+\
+        "#define HAVE_NATIVE_mpn_preinv_divrem_1 1\n"+\
+        "#define HAVE_NATIVE_mpn_redc_1 1\n"+\
+        "#define HAVE_NATIVE_mpn_rsblsh1_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_rsblsh2_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_rsblsh_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_rsh1add_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_rsh1add_nc 1\n"+\
+        "#define HAVE_NATIVE_mpn_rsh1sub_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_rsh1sub_nc 1\n"+\
+        "#define HAVE_NATIVE_mpn_rshift 1\n"+\
+        "#define HAVE_NATIVE_mpn_sqr_basecase 1\n"+\
+        "#define HAVE_NATIVE_mpn_sqr_diag_addlsh1 1\n"+\
+        "#define HAVE_NATIVE_mpn_sub_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_sub_nc 1\n"+\
+        "#define HAVE_NATIVE_mpn_sublsh1_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_xnor_n 1\n"+\
+        "#define HAVE_NATIVE_mpn_xor_n 1\n"+\
+        "#define HAVE_PTRDIFF_T 1\n"+\
+        "#define HAVE_QUAD_T 1\n"+\
+        "#define HAVE_RAISE 1\n"+\
+        "#define HAVE_STACK_T 1\n"+\
+        "#define HAVE_STDINT_H 1\n"+\
+        "#define HAVE_STDLIB_H 1\n"+\
+        "#define HAVE_STRCHR 1\n"+\
+        "#define HAVE_STRING_H 1\n"+\
+        "#define HAVE_STRNLEN 1\n"+\
+        "#define HAVE_STRTOL 1\n"+\
+        "#define HAVE_STRTOUL 1\n"+\
+        "#define HAVE_SYSCTL 1\n"+\
+        "#define HAVE_TIMES 1\n"+\
+        "#define HAVE_UINT_LEAST32_T 1\n"+\
+        "#define HAVE_UNISTD_H 1\n"+\
+        "#define LSYM_PREFIX \".L\"\n"+\
+        "#define SIZEOF_UNSIGNED_LONG 8\n"+\
+        "#define VERSION \"6.1.2-Astreaus\"\n"+\
+        "#define WANT_TMP_ALLOCA 1\n"+\
+        "#define restrict __restrict\n",
     )
 
-genrule(
-    name = "generate-config-h",
-    srcs = ["@//lib-math/gmp:config"],
-    outs = ["config.h"],
-    cmd = "cat $(location @//lib-math/gmp:config) > $(@D)/config.h",
-    )
+generators = [
+    "gen-bases",
+    "gen-fac",
+    "gen-fib",
+    "gen-trialdivtab",
+    "gen-psqr",
+    "gen-jacobitab",
+    ]
+
+[cc_binary(
+    name = "{}".format(generator),
+    srcs = ["{}.c".format(generator)],
+    deps = [":bootstrap"],
+    copts = copts,
+    ) for generator in generators]
 
 genrule(
     name = "generate-mp-bases-h",
@@ -327,28 +448,12 @@ genrule(
     outs = ["mpn/generic/mp_bases.c"],
     cmd = "$(location gen-bases) table 64 0 > $(@D)/mp_bases.c",
     )
-
-cc_binary(
-    name = "gen-bases",
-    srcs = ["gen-bases.c"],
-    deps = [":bootstrap"],
-    copts = copts,
-    )
-
 genrule(
     name = "generate-fac-table-h",
     tools = ["gen-fac"],
     outs = ["fac_table.h"],
     cmd = "$(location gen-fac) 64 0 > $(@D)/fac_table.h",
     )
-
-cc_binary(
-    name = "gen-fac",
-    srcs = ["gen-fac.c"],
-    deps = [":bootstrap"],
-    copts = copts,
-    )
-
 genrule(
     name = "generate-fib-table-h",
     tools = ["gen-fib"],
@@ -362,54 +467,23 @@ genrule(
     outs = ["mpn/generic/fib_table.c"],
     cmd = "$(location gen-fib) table 64 0 > $(@D)/fib_table.c",
     )
-
-cc_binary(
-    name = "gen-fib",
-    srcs = ["gen-fib.c"],
-    deps = [":bootstrap"],
-    copts = copts,
-    )
-
 genrule(
     name = "generate-trialdivtab-h",
     tools = ["gen-trialdivtab"],
     outs = ["trialdivtab.h"],
     cmd = "$(location gen-trialdivtab) 64 8000 > $(@D)/trialdivtab.h",
     )
-
-cc_binary(
-    name = "gen-trialdivtab",
-    srcs = ["gen-trialdivtab.c"],
-    deps = [":bootstrap"],
-    copts = copts,
-    )
-
 genrule(
     name = "generate-perfsqr-h",
     tools = ["gen-psqr"],
     outs = ["perfsqr.h"],
     cmd = "$(location gen-psqr) 64 0 > $(@D)/perfsqr.h",
     )
-
-cc_binary(
-    name = "gen-psqr",
-    srcs = ["gen-psqr.c"],
-    deps = [":bootstrap"],
-    copts = copts,
-    )
-
 genrule(
     name = "generate-jacobitab-h",
     tools = ["gen-jacobitab"],
     outs = ["jacobitab.h"],
     cmd = "$(location gen-jacobitab) > $(@D)/jacobitab.h",
-    )
-
-cc_binary(
-    name = "gen-jacobitab",
-    srcs = ["gen-jacobitab.c"],
-    deps = [":bootstrap"],
-    copts = copts,
     )
 
 cc_library(

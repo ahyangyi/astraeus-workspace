@@ -5,6 +5,8 @@ licenses(["notice"])  # MIT
 
 exports_files(["COPYING"])
 
+load("@//utils-base:files.bzl", "touch")
+
 cc_library(
     name = "gif",
     srcs = [
@@ -44,11 +46,7 @@ cc_library(
     includes = ["windows"],
 )
 
-genrule(
-    name = "windows_unistd_h",
-    outs = ["windows/unistd.h"],
-    cmd = "touch $@",
-)
+touch(["windows/unistd.h"])
 
 config_setting(
     name = "windows_msvc",
