@@ -10,7 +10,7 @@ def repos():
         )
 
     native.new_http_archive(
-        name = "googletest",
+        name = "com_google_googletest",
         urls = [
                 "https://github.com/google/googletest/archive/release-1.8.0.tar.gz",
                 ],
@@ -59,4 +59,19 @@ def repos():
         sha256 = "7876096b053ad598c31f6df35f7de5cd9ff2ba3162e5a5554e4fc198447e0347",
         strip_prefix = "xz-5.2.3",
         build_file = str(Label("//lib-base:xz.BUILD")),
+        )
+
+    native.http_archive(
+        name = "com_googlesource_code_cctz",
+        urls = [
+                "https://github.com/google/cctz/archive/v2.0.tar.gz",
+                ],
+        sha256 = "45c299e1056140ca0bdf4859f83d715ecc8135e48620b27724204fb3a653a34e",
+        strip_prefix = "cctz-2.0",
+        )
+
+    native.git_repository(
+        name = "com_google_absl",
+        commit = "7a64d73e1ef61b15971f8cc90876a5128729b0d4",
+        remote = "https://github.com/abseil/abseil-cpp.git",
         )
