@@ -15,4 +15,14 @@ def repos():
         sha256 = "87b565e89a9a684fe4ebeeddb8399dce2599f9c9049854ca8c0dfbdea0e21912",
         build_file = str(Label("//lib-math:gmp.BUILD")),
         strip_prefix = "gmp-6.1.2",
-        )   
+        )
+
+    native.new_http_archive(
+        name = "mpfr",
+        url = "http://www.mpfr.org/mpfr-current/mpfr-3.1.6.tar.xz",
+        sha256 = "7a62ac1a04408614fccdc506e4844b10cf0ad2c2b1677097f8f35d3a1344a950",
+        build_file = str(Label("//lib-math:mpfr.BUILD")),
+        strip_prefix = "mpfr-3.1.6",
+        )
+
+
