@@ -25,4 +25,10 @@ def repos():
         strip_prefix = "mpfr-3.1.6",
         )
 
-
+    native.new_http_archive(
+        name = "mpc",
+        url = "https://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz",
+        sha256 = "617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3",
+        build_file = str(Label("//lib-math:mpc.BUILD")),
+        strip_prefix = "mpc-1.0.3",
+        )
