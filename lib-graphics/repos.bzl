@@ -32,3 +32,14 @@ def repos():
         strip_prefix = "libjpeg-turbo-1.5.2",
         build_file = str(Label("//lib-graphics:jpeg-turbo.BUILD")),
     )
+
+    native.new_http_archive(
+        name = "tiff",
+        urls = [
+                "http://download.osgeo.org/libtiff/tiff-4.0.8.tar.gz",
+                ],
+        type = "tar.gz",
+        sha256 = "59d7a5a8ccd92059913f246877db95a2918e6c04fb9d43fd74e5c3390dac2910",
+        strip_prefix = "tiff-4.0.8",
+        build_file = str(Label("//lib-graphics:tiff.BUILD")),
+    )
