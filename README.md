@@ -9,3 +9,10 @@ UPGRADE POLICIES
 ================
 
 Well, as this is currently just a for-fun project, there is no set-in-stone policies. But in general I try to stay on the latest stable version of each package, avoid packages with known serious bugs, and only resort to provide multiple versions when there is a reason.
+
+LICENSE
+=======
+
+I haven't decided yet... And to be honest it shouldn't really matter since build scripts and configurations are not source code, so say GPL or BSD make no real difference.
+
+However, many BUILD files are grabbed from Tensorflow (often with modification). It is therefore mandatory for this project to include a license of theirs. It can be found at licences/tensorflow.
