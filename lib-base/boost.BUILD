@@ -9,7 +9,8 @@ copts = [
 cc_library(
     name = "boost-headers",
     hdrs = glob([
-        "**/*.hpp"
+        "**/*.hpp",
+        "**/*.ipp",
         ]),
     includes = [
         ".",
@@ -31,7 +32,7 @@ sublibraries = [
     "program_options",
     "random",
     "regex",
-#    "serialization",   # Fails for now
+    "serialization",
     "signals",
     "system",
     "thread",
