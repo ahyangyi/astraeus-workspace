@@ -36,5 +36,6 @@ cc_library(
         "-DHAVE_UNISTD_H=1",
         "-DMYTHREAD_POSIX=1",
         "-DHAVE_CONFIG_H=1",
+        "-Wno-unused-function", # Surpress known warnings
         ],
 )
