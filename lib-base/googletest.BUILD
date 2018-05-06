@@ -108,29 +108,47 @@ cc_library(
     ],
 )
 
-# FIXME(ahyangyi): The following does not work.
-# The BUILD file from Google's master branch does not work for 1.8.0, yet there was no BUILD for 1.8.0 either
-#cc_test(
-#    name = "gtest_samples",
-#    size = "small",
-#    #All Samples except:
-#    #sample9 ( main )
-#    #sample10 (main and takes a command line option and needs to be separate)
-#    srcs = [
-#        "googletest/samples/sample1_unittest.cc",
-#        "googletest/samples/sample2_unittest.cc",
-#        "googletest/samples/sample3_unittest.cc",
-#        "googletest/samples/sample4_unittest.cc",
-#        "googletest/samples/sample5_unittest.cc",
-#        "googletest/samples/sample6_unittest.cc",
-#        "googletest/samples/sample7_unittest.cc",
-#        "googletest/samples/sample8_unittest.cc",
-#    ],
-#    deps = [
-#        "gtest_sample_lib",
-#        ":gtest_main",
-#    ],
-#)
+cc_test(
+    name = "gtest_samples",
+    size = "small",
+    #All Samples except:
+    #sample5 ( symbol conflict with sample3)
+    #sample8 ( symbol conflict with sample7)
+    #sample9 ( main )
+    #sample10 (main and takes a command line option and needs to be separate)
+    srcs = [
+        "googletest/samples/sample1_unittest.cc",
+        "googletest/samples/sample2_unittest.cc",
+        "googletest/samples/sample3_unittest.cc",
+        "googletest/samples/sample4_unittest.cc",
+        "googletest/samples/sample6_unittest.cc",
+        "googletest/samples/sample7_unittest.cc",
+    ],
+    deps = [
+        "gtest_sample_lib",
+        ":gtest_main",
+    ],
+)
+
+cc_test(
+    name = "sample5_unittest",
+    size = "small",
+    srcs = ["googletest/samples/sample5_unittest.cc"],
+    deps = [
+        "gtest_sample_lib",
+        ":gtest_main",
+    ],
+)
+
+cc_test(
+    name = "sample8_unittest",
+    size = "small",
+    srcs = ["googletest/samples/sample8_unittest.cc"],
+    deps = [
+        "gtest_sample_lib",
+        ":gtest_main",
+    ],
+)
 
 cc_test(
     name = "sample9_unittest",
