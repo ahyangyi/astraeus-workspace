@@ -19,10 +19,10 @@ def repos():
 
     native.new_http_archive(
         name = "mpfr",
-        url = "http://www.mpfr.org/mpfr-current/mpfr-3.1.6.tar.xz",
-        sha256 = "7a62ac1a04408614fccdc506e4844b10cf0ad2c2b1677097f8f35d3a1344a950",
+        url = "http://www.mpfr.org/mpfr-current/mpfr-4.0.1.tar.xz",
+        sha256 = "67874a60826303ee2fb6affc6dc0ddd3e749e9bfcb4c8655e3953d0458a6e16e",
         build_file = str(Label("//lib-math:mpfr.BUILD")),
-        strip_prefix = "mpfr-3.1.6",
+        strip_prefix = "mpfr-4.0.1",
         )
 
     native.new_http_archive(

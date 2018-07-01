@@ -52,6 +52,8 @@ cc_library(
         "-DHAVE_ATTRIBUTE_MODE=1",
         "-DHAVE___GMPN_ROOTREM=1",
         "-DHAVE___GMPN_SBPI1_DIVAPPR_Q=1",
+        "-DHAVE_LITTLE_ENDIAN",
+        '-DMPFR_TUNE_CASE=\\"default\\"',
         ],
     deps = [
         "@gmp//:gmp",
