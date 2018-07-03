@@ -7,26 +7,31 @@ exports_files(["LICENSE"])
 
 load("@//utils-base:files.bzl", "touch", "template_rule")
 
+prefix="ImageMagick-6.9.9-14/"
+
 copts = [
     "-DMAGICKCORE_QUANTUM_DEPTH=16",
     "-DMAGICKCORE_HDRI_ENABLE=0",
+    "-Wno-unused-but-set-variable",
+    "-Wno-unused-function",
+    "-I$(GENDIR)/external/imagemagick/gen",
+    "-Iexternal/imagemagick/"+prefix,
     ]
 
 cc_library(
     name = "libmagick",
     srcs = glob([
-        "coders/*.c",
-        "coders/*.h",
-        "filters/*.c",
-        "filters/*.h",
-        "magick/*.c",
-        "magick/*.h",
-        "wand/*.c",
-        "wand/*.h",
+        prefix + "coders/*.c",
+        prefix + "coders/*.h",
+        prefix + "filters/*.c",
+        prefix + "filters/*.h",
+        prefix + "magick/*.c",
+        prefix + "magick/*.h",
+        prefix + "wand/*.c",
+        prefix + "wand/*.h",
         ], exclude = [
-        "magick/magick-baseconfig.h",
-        "coders/tiff.c",    # Breaks build
-        "wand/deprecate.c",
+        prefix + "coders/tiff.c",    # breaks build
+        prefix + "wand/deprecate.c",
         ]),
     copts = copts,
     deps = [
@@ -44,7 +49,7 @@ cc_library(
     )
 
 touched_headers = [
-    "gen/magick/version.h",
+#    "gen/magick/version.h",
     "gen/config/config.h",
     ]
 
@@ -53,18 +58,17 @@ cc_library(
     hdrs = touched_headers + [
         "gen/magick/magick-baseconfig.h",
         ],
-    includes = ["gen"],
     )
 
 template_rule(
     name = "gen-magick-magick-baseconfig.h",
-    src = "magick/magick-baseconfig.h",
+    src = prefix+"magick/magick-baseconfig.h",
     out = "gen/magick/magick-baseconfig.h",
     substitutions = {
         "#define MAGICKCORE_DJVU_DELEGATE 1": "",
-        "#define MAGICKCORE_DJVU_DELEGATE 1": "",
         "#define MAGICKCORE_FONTCONFIG_DELEGATE 1": "",
         "#define MAGICKCORE_FREETYPE_DELEGATE 1": "",
+        "#define MAGICKCORE_HAVE_XLOCALE_H 1": "",
         "#define MAGICKCORE_JBIG_DELEGATE 1": "",
         "#define MAGICKCORE_LCMS_DELEGATE 1": "",
         "#define MAGICKCORE_LIBOPENJP2_DELEGATE 1": "",
@@ -83,16 +87,17 @@ template_rule(
 touch(touched_headers)
 
 tools=[
-    "animate", "compare", "composite", "conjure", "convert", "display", "identify", "import", "magick", "magick-script", "mogrify", "stream",
+    "animate", "compare", "composite", "conjure", "convert", "display", "identify", "import", "mogrify", "stream",
     ]
 
 [cc_binary(
     name = "bin/{}".format(tool),
     srcs = glob([
-        "utilities/{}.c".format(tool),
-        "magick/*.h",
-        "wand/*.h",
-        ]),
+        prefix+"magick/*.h",
+        prefix+"wand/*.h",
+        ]) + [
+        prefix+"utilities/{}.c".format(tool),
+        ],
     copts = copts,
     deps = [
         ":libmagick",
