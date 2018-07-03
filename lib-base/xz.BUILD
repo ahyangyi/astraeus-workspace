@@ -2,6 +2,8 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # BSD/MIT-like license (for xz)
 
+load("@//utils-base:files.bzl", "touch")
+
 cc_library(
     name = "lzma",
     srcs = glob([
@@ -16,7 +18,9 @@ cc_library(
         "src/liblzma/check/crc64_fast.c",
         "src/liblzma/rangecoder/price_tablegen.c",
         "src/liblzma/lzma/fastpos_tablegen.c",
-    ]),
+    ]) + [
+        "gen/config.h",
+        ],
     copts = [
         "-Iexternal/xz/src/common",
         "-Iexternal/xz/src/liblzma/check",
@@ -26,6 +30,7 @@ cc_library(
         "-Iexternal/xz/src/liblzma/lzma",
         "-Iexternal/xz/src/liblzma/rangecoder",
         "-Iexternal/xz/src/liblzma/simple",
+        "-I$(GENDIR)/external/xz/gen/",
         "-DHAVE_INTTYPES_H=1",
         "-DHAVE_LIMITS_H=1",
         "-DHAVE_STDBOOL_H=1",
@@ -39,3 +44,7 @@ cc_library(
         "-Wno-unused-function", # Surpress known warnings
         ],
 )
+
+touch([
+    "gen/config.h",
+    ])
