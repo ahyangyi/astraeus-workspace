@@ -2,6 +2,9 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["restricted"])  # GPL (for fftw)
 
+load("@//utils-base:files.bzl", "touch")
+
+
 fake_headers = [
     "dft/simd/common/*.c",
     "rdft/simd/common/*.c",
@@ -24,7 +27,9 @@ cc_library(
         "*dft/simd/generic-simd256/*.c",
         "simd-support/*.h",
         "simd-support/*.c",
-        ], exclude=fake_headers),
+        ], exclude=fake_headers) + [
+        "gen/config.h",
+        ],
     hdrs = glob([
         "api/*.h",
         ] + fake_headers),
@@ -38,6 +43,7 @@ cc_library(
         "-DHAVE_MALLOC_H=1",
         "-DHAVE_MEMALIGN=1",
         "-DHAVE_STDLIB_H=1",
+        "-DHAVE_STDINT_H=1",
         "-DHAVE_STRING_H=1",
         "-DHAVE_SYS_TIME_H=1",
         "-DHAVE_GETTIMEOFDAY=1",
@@ -51,7 +57,14 @@ cc_library(
         "-Iexternal/fftw/rdft/simd",
         "-Iexternal/fftw/reodft",
         "-Iexternal/fftw/simd-support",
+        "-I$(GENDIR)/external/fftw/gen/",
         "-Wno-psabi",
         "-Wno-unused-variable",
+        "-DPACKAGE=\\\"fftw\\\"",
+        "-DPACKAGE_VERSION=\\\"Astraeus\\\"",
+        "-DVERSION=\\\"Astraeus\\\"",
         ],
 )
+touch([
+    "gen/config.h",
+    ])
