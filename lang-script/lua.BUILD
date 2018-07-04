@@ -28,5 +28,9 @@ cc_library(
         "src/lua.c",
         "src/luac.c",
         ]),
+    hdrs = [
+        "src/lua.h",
+        ],
+    includes = ["src"],
     copts = COPTS,
 )
