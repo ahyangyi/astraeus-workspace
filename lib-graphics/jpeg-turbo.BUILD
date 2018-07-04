@@ -27,15 +27,15 @@ libjpegturbo_copts = select({
         "-O3",
         "-w",
     ],
-}) + select({
-    ":armeabi-v7a": [
-        "-D__ARM_NEON__",
-        "-march=armv7-a",
-        "-mfloat-abi=softfp",
-        "-fprefetch-loop-arrays",
-    ],
-    "//conditions:default": [],
-})
+}) #+ select({
+#    ":armeabi-v7a": [
+#        "-D__ARM_NEON__",
+#        "-march=armv7-a",
+#        "-mfloat-abi=softfp",
+#        "-fprefetch-loop-arrays",
+#    ],
+#    "//conditions:default": [],
+#})
 
 cc_library(
     name = "jpeg",
@@ -121,8 +121,8 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = select({
         ":k8": [":simd_x86_64"],
-        ":armeabi-v7a": [":simd_armv7a"],
-        ":arm64-v8a": [":simd_armv8a"],
+#       ":armeabi-v7a": [":simd_armv7a"],
+#        ":arm64-v8a": [":simd_armv8a"],
         "//conditions:default": [":simd_none"],
     }),
 )
@@ -375,8 +375,8 @@ genrule(
         ":windows": "cp $(location jconfig_win.h) $@",
         ":windows_msvc": "cp $(location jconfig_win.h) $@",
         ":k8": "cp $(location jconfig_nowin_simd.h) $@",
-        ":armeabi-v7a": "cp $(location jconfig_nowin_simd.h) $@",
-        ":arm64-v8a": "cp $(location jconfig_nowin_simd.h) $@",
+#        ":armeabi-v7a": "cp $(location jconfig_nowin_simd.h) $@",
+#        ":arm64-v8a": "cp $(location jconfig_nowin_simd.h) $@",
         "//conditions:default": "cp $(location jconfig_nowin_nosimd.h) $@",
     }),
 )
