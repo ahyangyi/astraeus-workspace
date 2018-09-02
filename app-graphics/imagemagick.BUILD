@@ -30,7 +30,6 @@ cc_library(
         prefix + "wand/*.c",
         prefix + "wand/*.h",
         ], exclude = [
-        prefix + "coders/tiff.c",    # breaks build
         prefix + "wand/deprecate.c",
         ]),
     copts = copts,
@@ -42,6 +41,7 @@ cc_library(
         "@jpeg//:jpeg",
         "@png//:png",
         "@xz//:lzma",
+        "@tiff//:tiff",
         ],
     linkopts = [
         "-lpthread",
@@ -76,7 +76,6 @@ template_rule(
         "#define MAGICKCORE_PANGOCAIRO_DELEGATE 1": "",
         "#define MAGICKCORE_RAW_R_DELEGATE 1": "",
         "#define MAGICKCORE_SANS_DELEGATE 1": "",
-        "#define MAGICKCORE_TIFF_DELEGATE 1": "",
         "#define MAGICKCORE_WEBP_DELEGATE 1": "",
         "#define MAGICKCORE_WMF_DELEGATE 1": "",
         "#define MAGICKCORE_X11_DELEGATE 1": "",
