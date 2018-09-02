@@ -2,12 +2,11 @@ def repos():
     native.new_http_archive(
         name = "png",
         urls = [
-            "http://ftp-osl.osuosl.org/pub/libpng/src/libpng16/libpng-1.6.34.tar.xz",
-            "http://prdownloads.sourceforge.net/libpng/libpng-1.6.34.tar.xz?download",
+            "http://prdownloads.sourceforge.net/libpng/libpng-1.6.35.tar.xz?download",
         ],
         type = "tar.xz",
-        sha256 = "2f1e960d92ce3b3abd03d06dfec9637dfbd22febf107a536b44f7a47c60659f6",
-        strip_prefix = "libpng-1.6.34",
+        sha256 = "23912ec8c9584917ed9b09c5023465d71709dce089be503c7867fec68a93bcd7",
+        strip_prefix = "libpng-1.6.35",
         build_file = str(Label("//lib-graphics:png.BUILD")),
     )
 
