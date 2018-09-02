@@ -2,8 +2,8 @@ def repos():
     native.new_http_archive(
         name = "imagemagick",
         urls = [
-            "https://launchpad.net/imagemagick/main/6.9.9-14/+download/ImageMagick-6.9.9-14.tar.gz",
+            "https://launchpad.net/imagemagick/main/6.9.10-5/+download/ImageMagick-6.9.10-5.tar.gz",
         ],
-        sha256 = "7a129d51fdb332675a48e13651b438595f6d72cef199bf807c477b1161920043",
+        sha256 = "fab19a32821b9a47bd3f3503e2527580e0e1dba15e0847702a2ec6827b86c8b0",
         build_file = str(Label("//app-graphics:imagemagick.BUILD")),
     )

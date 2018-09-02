@@ -7,7 +7,7 @@ exports_files(["LICENSE"])
 
 load("@//utils-base:files.bzl", "touch", "template_rule")
 
-prefix="ImageMagick-6.9.9-14/"
+prefix="ImageMagick-6.9.10-5/"
 
 copts = [
     "-DMAGICKCORE_QUANTUM_DEPTH=16",
