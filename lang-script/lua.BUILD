@@ -31,6 +31,8 @@ cc_library(
     hdrs = [
         "src/lua.h",
         "src/luaconf.h",
+        "src/lualib.h",
+        "src/lauxlib.h",
         ],
     includes = ["src"],
     copts = COPTS,
