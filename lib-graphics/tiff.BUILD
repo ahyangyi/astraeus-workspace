@@ -33,6 +33,7 @@ cc_library(
         "-DHAVE_STDLIB_H=1",
         "-DHAVE_STRING_H=1",
         "-DHAVE_UNISTD_H=1",
+        "-DHAVE_SNPRINTF=1",
         '-DTIFF_INT32_FORMAT=\\"%d\\"',
         '-DTIFF_INT64_FORMAT=\\"%ld\\"',
         '-DTIFF_PTRDIFF_FORMAT=\\"%ld\\"',
