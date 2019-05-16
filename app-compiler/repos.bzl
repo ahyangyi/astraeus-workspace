@@ -1,5 +1,7 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 def repos():
-  native.new_http_archive(
+  http_archive(
       name = "nasm",
       urls = [
           "https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.xz",

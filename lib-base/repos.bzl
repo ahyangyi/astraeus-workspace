@@ -1,5 +1,7 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 def repos():
-    native.new_http_archive(
+    http_archive(
         name = "zlib",
         urls = [
                 "https://zlib.net/zlib-1.2.11.tar.xz",
@@ -9,7 +11,7 @@ def repos():
         build_file = str(Label("//lib-base:zlib.BUILD")),
         )
 
-    native.new_http_archive(
+    http_archive(
         name = "googletest",
         urls = [
                 "https://github.com/google/googletest/archive/release-1.8.0.tar.gz",
@@ -19,7 +21,7 @@ def repos():
         build_file = str(Label("//lib-base:googletest.BUILD")),
         )
 
-    native.http_archive(
+    http_archive(
         name = "com_github_gflags_gflags",
         urls = [
                 "https://github.com/gflags/gflags/archive/v2.2.1.tar.gz",
@@ -28,7 +30,7 @@ def repos():
         strip_prefix = "gflags-2.2.1",
         )
 
-    native.new_http_archive(
+    http_archive(
         name = "boost",
         urls = [
                 "https://dl.bintray.com/boostorg/release/1.65.1/source/boost_1_65_1.tar.bz2",
@@ -39,7 +41,7 @@ def repos():
         build_file = str(Label("//lib-base:boost.BUILD")),
         )
 
-    native.new_http_archive(
+    http_archive(
         name = "bzip2",
         urls = [
                 "http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz",
@@ -49,7 +51,7 @@ def repos():
         build_file = str(Label("//lib-base:bzip2.BUILD")),
         )
 
-    native.new_http_archive(
+    http_archive(
         name = "xz",
         urls = [
                 "https://tukaani.org/xz/xz-5.2.4.tar.xz",

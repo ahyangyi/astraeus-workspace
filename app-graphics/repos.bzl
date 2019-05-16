@@ -1,5 +1,7 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 def repos():
-    native.new_http_archive(
+    http_archive(
         name = "imagemagick",
         urls = [
             "https://launchpad.net/imagemagick/main/6.9.10-5/+download/ImageMagick-6.9.10-5.tar.gz",

@@ -1,5 +1,7 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 def repos():
-    native.new_http_archive(
+    http_archive(
         name = "png",
         urls = [
             "http://prdownloads.sourceforge.net/libpng/libpng-1.6.35.tar.xz?download",
@@ -10,7 +12,7 @@ def repos():
         build_file = str(Label("//lib-graphics:png.BUILD")),
     )
 
-    native.new_http_archive(
+    http_archive(
         name = "gif",
         urls = [
             "http://mirror.bazel.build/ufpr.dl.sourceforge.net/project/giflib/giflib-5.1.4.tar.gz",
@@ -21,7 +23,7 @@ def repos():
         build_file = str(Label("//lib-graphics:gif.BUILD")),
     )
 
-    native.new_http_archive(
+    http_archive(
         name = "jpeg",
         urls = [
                 "https://sourceforge.net/projects/libjpeg-turbo/files/1.5.3/libjpeg-turbo-1.5.3.tar.gz/download",
@@ -32,7 +34,7 @@ def repos():
         build_file = str(Label("//lib-graphics:jpeg-turbo.BUILD")),
     )
 
-    native.new_http_archive(
+    http_archive(
         name = "tiff",
         urls = [
                 "http://download.osgeo.org/libtiff/tiff-4.0.9.tar.gz",
