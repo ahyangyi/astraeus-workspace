@@ -21,6 +21,9 @@ cc_library(
     ]) + [
         "gen/config.h",
         ],
+    includes = [
+        "src/liblzma/api",
+        ],
     copts = [
         "-Iexternal/xz/src/common",
         "-Iexternal/xz/src/liblzma/check",
