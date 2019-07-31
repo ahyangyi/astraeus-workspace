@@ -62,3 +62,13 @@ def repos():
         strip_prefix = "xz-5.2.4",
         build_file = str(Label("//lib-base:xz.BUILD")),
         )
+
+    http_archive(
+        name = "gperftools",
+        urls = [
+                "https://github.com/gperftools/gperftools/releases/download/gperftools-2.7/gperftools-2.7.tar.gz",
+                ],
+        sha256 = "1ee8c8699a0eff6b6a203e59b43330536b22bbcbe6448f54c7091e5efb0763c9",
+        strip_prefix = "gperftools-2.7",
+        build_file = str(Label("//lib-base:gperftools.BUILD")),
+        )
