@@ -10,6 +10,7 @@ copts = [
         "-Wno-unused-local-typedefs",
         "-Wno-sign-compare",
         "-Wno-unused-function",
+        "-Wno-unused-result",
         "-Wno-attribute-alias",
         "-Wno-alloc-size-larger-than",
         "-Wno-address",
