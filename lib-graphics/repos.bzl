@@ -26,11 +26,11 @@ def repos():
     http_archive(
         name = "jpeg",
         urls = [
-                "https://sourceforge.net/projects/libjpeg-turbo/files/2.0.0/libjpeg-turbo-2.0.0.tar.gz/download",
+                "https://sourceforge.net/projects/libjpeg-turbo/files/2.0.3/libjpeg-turbo-2.0.3.tar.gz/download",
                 ],
         type = "tar.gz",
-        sha256 = "778876105d0d316203c928fd2a0374c8c01f755d0a00b12a1c8934aeccff8868",
-        strip_prefix = "libjpeg-turbo-2.0.0",
+        sha256 = "4246de500544d4ee408ee57048aa4aadc6f165fc17f141da87669f20ed3241b7",
+        strip_prefix = "libjpeg-turbo-2.0.3",
         build_file = str(Label("//lib-graphics:jpeg-turbo.BUILD")),
     )
 
