@@ -4,9 +4,9 @@ def repos():
     http_archive(
         name = "vim",
         urls = [
-                "https://github.com/vim/vim/archive/v8.1.0146.tar.gz",
+                "https://github.com/vim/vim/archive/v8.1.1846.tar.gz",
                 ],
-        sha256 = "6e4e72e167eb5a3ed643793857d84f5dc3cbcbc7c3ff08b8e1e6cc6b9f9d1223",
-        strip_prefix = "vim-8.1.0146",
+        sha256 = "68de2854199a396aee19fe34c32c02db5784c76c0334d58b510266436c7529bb",
+        strip_prefix = "vim-8.1.1846",
         build_file = str(Label("//app-editor:vim.BUILD")),
         )

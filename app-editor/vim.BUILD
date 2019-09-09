@@ -2,7 +2,7 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["restricted"])  # Vim license
 
-load("@//utils-base:files.bzl", "touch", "write_file_rule")
+load("@//utils-base:files.bzl", "touch", "write_file_rule", "template_rule")
 
 cc_library(
     name = "vim-include",
@@ -27,6 +27,8 @@ cc_binary(
     srcs = glob([
         "src/*.c",
         "src/*.h",
+        "src/xdiff/*.c",
+        "src/xdiff/*.h",
         ], exclude = [
         "src/*_test.c",
         "src/dll*.c",
@@ -43,6 +45,7 @@ cc_binary(
         "src/workshop.c",
         "src/xpm_w32.c",
         "src/regexp_nfa.c", # Actually a header
+        "src/xdiff/xinclude.h",
         ]) + [
         "src/os_unix.c",
         "gen/pathdef.c",
@@ -83,6 +86,7 @@ cc_binary(
         "-DUNIX=1",
         "-DVIM_SIZEOF_INT=4",
         "-Iexternal/vim/src/",
+        "-Iexternal/vim/src/xdiff/",
         "-Wno-parentheses",
         ],
     deps = [
@@ -96,9 +100,11 @@ cc_library(
     hdrs = [
         "gen/auto/osdef.h",
         "gen/auto/config.h",
+        "gen/xdiff/xinclude.h",
         ],
     includes = [
         "gen",
+        "gen/xdiff",
         ],
     )
 
@@ -118,3 +124,10 @@ write_file_rule(
              "char_u *compiled_user = (char_u *)\"Astreaus\";\n" +\
              "char_u *compiled_sys = (char_u *)\"Astraeus\";",
     )
+
+template_rule(
+    name = "copy xinclude",
+    src = "src/xdiff/xinclude.h",
+    out = "gen/xdiff/xinclude.h",
+    substitutions = {}
+)
