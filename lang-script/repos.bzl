@@ -10,3 +10,22 @@ def repos():
         strip_prefix = "lua-5.3.4",
         build_file = str(Label("//lang-script:lua.BUILD")),
         )
+
+    http_archive(
+        name = "python35",
+        urls = [
+                "https://www.python.org/ftp/python/3.5.7/Python-3.5.7.tar.xz",
+                ],
+        sha256 = "285892899bf4d5737fd08482aa6171c6b2564a45b9102dfacfb72826aebdc7dc",
+        strip_prefix = "Python-3.5.7",
+        build_file = str(Label("//lang-script:python.BUILD")),
+        )
+    http_archive(
+        name = "python36",
+        urls = [
+                "https://www.python.org/ftp/python/3.6.9/Python-3.6.9.tar.xz",
+                ],
+        sha256 = "5e2f5f554e3f8f7f0296f7e73d8600c4e9acbaee6b2555b83206edf5153870da",
+        strip_prefix = "Python-3.6.9",
+        build_file = str(Label("//lang-script:python.BUILD")),
+        )
