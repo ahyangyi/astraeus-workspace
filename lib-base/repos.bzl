@@ -44,10 +44,11 @@ def repos():
     http_archive(
         name = "bzip2",
         urls = [
-                "http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz",
+                "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz",
+                "https://fossies.org/linux/misc/bzip2-1.0.8.tar.gz",
                 ],
-        sha256 = "a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd",
-        strip_prefix = "bzip2-1.0.6",
+        sha256 = "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
+        strip_prefix = "bzip2-1.0.8",
         build_file = str(Label("//lib-base:bzip2.BUILD")),
         )
 
