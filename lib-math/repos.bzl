@@ -21,10 +21,10 @@ def repos():
 
     http_archive(
         name = "mpfr",
-        url = "http://www.mpfr.org/mpfr-current/mpfr-4.0.1.tar.xz",
-        sha256 = "67874a60826303ee2fb6affc6dc0ddd3e749e9bfcb4c8655e3953d0458a6e16e",
+        url = "http://www.mpfr.org/mpfr-current/mpfr-4.0.2.tar.xz",
+        sha256 = "1d3be708604eae0e42d578ba93b390c2a145f17743a744d8f3f8c2ad5855a38a",
         build_file = str(Label("//lib-math:mpfr.BUILD")),
-        strip_prefix = "mpfr-4.0.1",
+        strip_prefix = "mpfr-4.0.2",
         )
 
     http_archive(
