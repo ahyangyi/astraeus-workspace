@@ -8,7 +8,7 @@ cc_library(
     name = "lzma",
     srcs = glob([
         "src/liblzma/*/*.c",
-        "src/liblzma/*/*.h",
+        "src/liblzma/**/*.h",
         "src/common/*.c",
         "src/common/*.h",
     ], exclude = [
