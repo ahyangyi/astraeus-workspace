@@ -12,7 +12,4 @@ Well, as this is currently just a for-fun project, there is no set-in-stone poli
 
 LICENSE
 =======
-
-I haven't decided yet... And to be honest it shouldn't really matter since build scripts and configurations are not source code, so say GPL or BSD make no real difference.
-
-However, many BUILD files are grabbed from Tensorflow (often with modification). It is therefore mandatory for this project to include a license of theirs. It can be found at licences/tensorflow.
+The files included in this repository, unless specially noted, are licensed under Apache License 2.0.
