@@ -73,3 +73,12 @@ def repos():
         strip_prefix = "gperftools-2.7",
         build_file = str(Label("//lib-base:gperftools.BUILD")),
         )
+
+    http_archive(
+        name = "com_github_google_flatbuffers",
+        urls = [
+                "https://github.com/google/flatbuffers/archive/v1.11.0.tar.gz",
+                ],
+        sha256 = "3f4a286642094f45b1b77228656fbd7ea123964f19502f9ecfd29933fd23a50b",
+        strip_prefix = "flatbuffers-1.11.0",
+        )
