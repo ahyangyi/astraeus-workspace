@@ -9,8 +9,6 @@ exports_files(["LICENSE.md"])
 
 load("@//utils-base:files.bzl", "template_rule")
 
-libjpegturbo_nocopts = "-[W]error"
-
 WIN_COPTS = [
     "/Ox",
     "-DWITH_SIMD",
@@ -122,7 +120,6 @@ cc_library(
         "jstdhuff.c",  # should have been named .inc
     ],
     copts = libjpegturbo_copts,
-    nocopts = libjpegturbo_nocopts,
     visibility = ["//visibility:public"],
     deps = select({
         ":k8": [":simd_x86_64"],
@@ -170,7 +167,6 @@ cc_library(
         "simd/powerpc/jsimd_altivec.h",
     ],
     copts = libjpegturbo_copts,
-    nocopts = libjpegturbo_nocopts,
 )
 
 cc_library(
@@ -219,7 +215,6 @@ cc_library(
     ],
     copts = libjpegturbo_copts,
     linkstatic = 1,
-    nocopts = libjpegturbo_nocopts,
 )
 
 genrule(
@@ -329,7 +324,6 @@ cc_library(
         "simd/jsimd.h",
     ],
     copts = libjpegturbo_copts,
-    nocopts = libjpegturbo_nocopts,
 )
 
 cc_library(
@@ -350,7 +344,6 @@ cc_library(
         "simd/jsimd.h",
     ],
     copts = libjpegturbo_copts,
-    nocopts = libjpegturbo_nocopts,
 )
 
 cc_library(
@@ -503,7 +496,6 @@ cc_library(
         "jsimddct.h",
     ],
     copts = libjpegturbo_copts,
-    nocopts = libjpegturbo_nocopts,
 )
 
 template_rule(
