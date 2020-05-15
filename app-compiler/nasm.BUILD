@@ -17,7 +17,6 @@ cc_binary(
         "nasmlib/badenum.c",
         "nasmlib/bsi.c",
         "nasmlib/crc64.c",
-        "nasmlib/errfile.c",
         "nasmlib/file.c",
         "nasmlib/file.h",
         "nasmlib/filename.c",
